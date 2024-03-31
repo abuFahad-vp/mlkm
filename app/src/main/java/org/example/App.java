@@ -14,8 +14,8 @@ public class App {
         System.out.println("Server is listening to the port " 
                 + args[0] + "...");
         int threadCount = 4;
-        if(args.length > 2) {
-            threadCount = Integer.parseInt(args[2]);
+        if(args.length > 1) {
+            threadCount = Integer.parseInt(args[1]);
         }
         ThreadPool pool = new ThreadPool(threadCount);
         System.out.println("Thread Count = " + threadCount);
@@ -24,7 +24,7 @@ public class App {
         // if forcefully closed
         boolean isUnlimitedConnections = false;
         int connectionLimit;
-        if(args.length < 2) {
+        if(args.length < 3) {
             isUnlimitedConnections = true;
             connectionLimit = 0;
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -38,7 +38,7 @@ public class App {
                 System.out.println("Server stopped.");
             }));
         }else {
-            connectionLimit = Integer.parseInt(args[1]);
+            connectionLimit = Integer.parseInt(args[2]);
         }
 
         int numOfConnections = 0;
